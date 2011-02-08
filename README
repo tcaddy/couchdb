@@ -1,6 +1,16 @@
 Apache CouchDB README
 =====================
 
+Details about this Fork
+--------------------------------
+
+The /etc/rc.d/couchdb script that is created is a bit annoying if $COUCHDB_USER is the same as the current user.  It attempts to use su to start/stop CouchDB binary and it prompts for the password at the shell.
+
+To fix this, I added another condition to the if statements to make sure the result of `whoami` does not equal the value of $COUCHDB_USER.
+
+Aside from edits to this README file, only one file has been changed in forked repo.
+
+
 Installation
 ------------
 
