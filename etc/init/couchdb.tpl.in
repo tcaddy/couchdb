@@ -77,7 +77,7 @@ start_couchdb () {
         command="$command $COUCHDB_OPTIONS"
     fi
     mkdir -p "$RUN_DIR"
-    if test -n "$COUCHDB_USER"; then
+    if (test -n "$COUCHDB_USER" ) && (test "$(whoami)" != "$COUCHDB_USER" ); then
         chown $COUCHDB_USER "$RUN_DIR"
         if su $COUCHDB_USER -c "$command" > /dev/null; then
             return $SCRIPT_OK
@@ -100,7 +100,7 @@ stop_couchdb () {
     if test -n "$COUCHDB_OPTIONS"; then
         command="$command $COUCHDB_OPTIONS"
     fi
-    if test -n "$COUCHDB_USER"; then
+    if (test -n "$COUCHDB_USER" ) && (test "$(whoami)" != "$COUCHDB_USER" ); then
         if su $COUCHDB_USER -c "$command" > /dev/null; then
             return $SCRIPT_OK
         else
